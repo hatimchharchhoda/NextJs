@@ -13,7 +13,7 @@ export default function Home() {
       <WhyChooseUs />
       <MusicSchoolTestimonailCards />
       <UpcomingWebinars />
-      <Instructors /> 
+      <Instructors />
     </div>
   );
 }
