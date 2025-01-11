@@ -6,6 +6,8 @@ import { sendVerification } from "@/helpers/sendVerificatonEmail";
 export async function POST(request: Request){
    await dbConnect()
    try {
+      console.log("entering try block");
+      
       const {username, email, password} = await request.json()
 
       const exsistingUserByUsername = await UserModel.findOne({username: username, isVerified: true})
@@ -16,7 +18,8 @@ export async function POST(request: Request){
 
       const existingUserByEmail = await UserModel.findOne({email: email})
       const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
-
+      console.log("username checked");
+      
       if(existingUserByEmail){
          if(existingUserByEmail.isVerified) {
             return Response.json({
@@ -47,7 +50,8 @@ export async function POST(request: Request){
          })
          await newUser.save()
       }
-
+      console.log("trying to send email");
+      
       // sending email and checking response
       const emailResponse = await sendVerification(email, username ,verifyCode)
 
@@ -57,7 +61,8 @@ export async function POST(request: Request){
             message: emailResponse.message
          }, {status: 500})
       }
-
+      console.log("email sended");
+      
       return Response.json({
          success: true,
          message: "Email has been send successfully. Please check your mail for verification"
