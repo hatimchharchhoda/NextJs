@@ -10,6 +10,7 @@ export async function DELETE(request: Request, {params} : {params: {messageid: s
    const session = await getServerSession(authOptions);
 
    const user: User = session?.user as User
+   
    if(!session || !session.user) {
       return Response.json({
          success: false,
