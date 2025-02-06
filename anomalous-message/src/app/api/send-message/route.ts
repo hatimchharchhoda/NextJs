@@ -12,8 +12,15 @@ export async function POST(request: Request) {
       if(!user) {
          return Response.json({
             success: false,
-            messages: "Username is not available"
-         }, {status: 403})
+            message: "Username is not available"
+         }, {status: 400})
+      }
+
+      if(!user.isAcceptingMessage) {
+         return Response.json({
+            success: false,
+            message: "Admin has desabled to send feedback "
+         }, {status: 400})
       }
 
       const newMessage = {content, createdAt: new Date()}
@@ -22,7 +29,7 @@ export async function POST(request: Request) {
 
       return Response.json({
          success: true,
-         messages: "Message sent successfully"
+         message: "Message sent successfully"
       }, {status: 200})
 
    } catch (error) {
