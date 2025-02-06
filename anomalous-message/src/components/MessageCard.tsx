@@ -48,7 +48,7 @@ function MessageCard({message, onMessageDelete}: messageCardProps) {
       </div>
       <div>
         <AlertDialog>
-          <AlertDialogTrigger>
+          <AlertDialogTrigger asChild>
             <Button
               variant={"destructive"}
               className="flex items-center justify-center w-10 h-10"

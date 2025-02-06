@@ -20,6 +20,16 @@ export async function middleware(request: NextRequest) {
         }
       }
    }
+
+   if(!token) {
+    const redirectPath = "/";
+    if (url.pathname.startsWith("/dashboard")) {
+      if (url.pathname !== redirectPath) {
+        return NextResponse.redirect(new URL(redirectPath, request.nextUrl.origin));
+      }
+    }
+   }
+
    return NextResponse.next()
 }
 
