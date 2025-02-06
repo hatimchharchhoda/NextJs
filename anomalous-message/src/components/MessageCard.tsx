@@ -2,7 +2,6 @@
 import React from 'react'
 import {
    Card,
-   CardDescription,
    CardHeader,
    CardTitle,
  } from "@/components/ui/card"
@@ -32,6 +31,8 @@ type messageCardProps = {
 function MessageCard({message, onMessageDelete}: messageCardProps) {
    const { toast } = useToast()
    const handleDeleteConfirm = async () => {
+      console.log(message._id);
+      
       const response = await axios.delete<ApiResponse>(`/api/deletemessage/${message._id}`)
       toast({
          title: response.data.message
@@ -43,7 +44,6 @@ function MessageCard({message, onMessageDelete}: messageCardProps) {
       <div className="space-y-2">
         <CardHeader>
           <CardTitle>{message.content}</CardTitle>
-          <CardDescription>{message.createdAt}</CardDescription>
         </CardHeader>
       </div>
       <div>

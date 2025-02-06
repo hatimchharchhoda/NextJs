@@ -2,7 +2,8 @@ import mongoose, {Schema, Document} from "mongoose";
 
 export interface Message extends Document {
    content: string;
-   createdAt: Date
+   createdAt: Date;
+   _id: string;
 }
 
 const MessageSchema: Schema<Message> = new Schema({
@@ -12,8 +13,7 @@ const MessageSchema: Schema<Message> = new Schema({
    },
    createdAt: {
       type: Date,
-      default: Date.now(),
-      required: true
+      default: Date.now
    }
 })
 
